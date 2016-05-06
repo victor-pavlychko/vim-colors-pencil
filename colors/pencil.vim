@@ -4,6 +4,17 @@
 " Maintainer: github.com/reedes github.com/mattly
 " License:    The MIT License (MIT)
 
+" #DD6666
+" #BAC55D
+" #EBCD61
+" #8EB7DF
+" #CEACDE
+" #83CABF
+" #2A2A2A
+" #545454
+" #EEEEEE
+" #FFFFFF
+
 " Original iA Writer colors, to use as a guide
 " White           #F1F1F1
 " OffWhiteIPad    #F5F2EC
@@ -63,7 +74,7 @@ if ! exists("g:pencil_gutter_color")
 endif
 
 " Colors
-let s:black           = { "gui": "#212121", "cterm": "0"   }
+let s:black           = { "gui": "#212121", "cterm": "233" }
 let s:medium_gray     = { "gui": "#767676", "cterm": "243" }
 let s:white           = { "gui": "#F1F1F1", "cterm": "15"  }
 let s:actual_white    = { "gui": "#FFFFFF", "cterm": "231" }
@@ -82,28 +93,29 @@ else
   let s:lighter_gray  = { "gui": "#C6C6C6", "cterm": "251" }
 endif
 
-let s:pink            = { "gui": "#fb007a", "cterm": "9"   }
-let s:dark_red        = { "gui": "#C30771", "cterm": "1"   }
-let s:light_red       = { "gui": "#E32791", "cterm": "1"   }
+let s:pink            = { "gui": "#CEACDE", "cterm": "9"   }
+let s:dark_red        = { "gui": "#DD6666", "cterm": "1"   }
+let s:light_red       = { "gui": "#DD6666", "cterm": "1"   }
 let s:orange          = { "gui": "#D75F5F", "cterm": "167" }
 
-let s:darker_blue     = { "gui": "#005F87", "cterm": "18"  }
-let s:dark_blue       = { "gui": "#008EC4", "cterm": "4"   }
-let s:blue            = { "gui": "#20BBFC", "cterm": "12"  }
-let s:light_blue      = { "gui": "#b6d6fd", "cterm": "153" }
-let s:dark_cyan       = { "gui": "#20A5BA", "cterm": "6"   }
-let s:light_cyan      = { "gui": "#4FB8CC", "cterm": "14"  }
+let s:darker_blue     = { "gui": "#8EB7DF", "cterm": "18"  }
+let s:dark_blue       = { "gui": "#8EB7DF", "cterm": "4"   }
+let s:blue            = { "gui": "#8EB7DF", "cterm": "12"  }
+let s:light_blue      = { "gui": "#8EB7DF", "cterm": "153" }
+let s:dark_cyan       = { "gui": "#83CABF", "cterm": "6"   }
+let s:light_cyan      = { "gui": "#83CABF", "cterm": "14"  }
 
-let s:dark_green      = { "gui": "#10A778", "cterm": "2"   }
-let s:light_green     = { "gui": "#5FD7A7", "cterm": "10"  }
+let s:dark_green      = { "gui": "#BAC55D", "cterm": "2"   }
+let s:light_green     = { "gui": "#BAC55D", "cterm": "10"  }
 
-let s:dark_purple     = { "gui": "#523C79", "cterm": "5"   }
-let s:light_purple    = { "gui": "#6855DE", "cterm": "13"  }
+let s:dark_purple     = { "gui": "#CEACDE", "cterm": "5"   }
+let s:light_purple    = { "gui": "#CEACDE", "cterm": "13"  }
 
-let s:yellow          = { "gui": "#F3E430", "cterm": "11"  }
-let s:dark_yellow     = { "gui": "#A89C14", "cterm": "3"   }
+let s:yellow          = { "gui": "#EBCD61", "cterm": "11"  }
+let s:dark_yellow     = { "gui": "#EBCD61", "cterm": "3"   }
 
 if &background == "dark"
+  let g:airline_pencil_bg='dark'
   let s:bg              = s:black
   let s:bg_subtle       = s:light_black
   let s:bg_very_subtle  = s:subtle_black
@@ -115,6 +127,7 @@ if &background == "dark"
   let s:red             = s:light_red
   let s:visual          = s:lighter_black
 else
+  let g:airline_pencil_bg='light'
   let s:bg              = s:white
   let s:bg_subtle       = s:light_gray
   let s:bg_very_subtle  = s:lighter_gray
@@ -190,7 +203,7 @@ hi! link Operator         Statement
 hi! link Keyword          Statement
 hi! link Exception        Statement
 
-call s:h("PreProc",       {"fg": s:red})
+call s:h("PreProc",       {"fg": s:yellow})
 hi! link Include          PreProc
 hi! link Define           PreProc
 hi! link Macro            PreProc
@@ -200,10 +213,10 @@ call s:h("Type",          {"fg": s:purple})
 hi! link StorageClass     Type
 hi! link Structure        Type
 hi! link Typedef          Type
+hi! link Tag              Type
 
-call s:h("Special",       {"fg": s:pink})
+call s:h("Special",       {"fg": s:norm})
 hi! link SpecialChar      Special
-hi! link Tag              Special
 hi! link Delimiter        Special
 hi! link SpecialComment   Special
 hi! link Debug            Special
@@ -224,7 +237,8 @@ call s:h("IncSearch",     {"bg": s:yellow, "fg": s:light_black})
 call s:h("Search",        {"bg": s:bg_subtle})
 call s:h("MoreMsg",       {"fg": s:medium_gray, "gui": "bold", "cterm": "bold"})
 hi! link ModeMsg MoreMsg
-call s:h("LineNr",        {"fg": s:bg_subtle})
+" call s:h("LineNr",        {"fg": s:bg_subtle})
+call s:h("LineNr",        {"fg": s:lighter_black})
 call s:h("CursorLineNr",  {"fg": s:blue, "bg": s:bg_very_subtle})
 call s:h("Question",      {"fg": s:red})
 call s:h("StatusLine",    {"bg": s:bg_very_subtle})
@@ -275,6 +289,10 @@ call s:h("qfLineNr",      {"fg": s:medium_gray})
 " HTML syntax
 hi! link htmlTag          Special
 hi! link htmlEndTag       htmlTag
+
+hi! link xmlEntity        Identifier
+hi! link htmlEntity       xmlEntity
+hi! link htmlSpecialChar  xmlEntity
 
 hi! link htmlTagName      KeyWord
 " html5 tags show up as htmlTagN
@@ -386,3 +404,4 @@ else
   hi link GitGutterChange             LineNr
   hi link GitGutterChangeDelete       LineNr
 endif
+
